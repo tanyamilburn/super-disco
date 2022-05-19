@@ -1,6 +1,6 @@
 // Set the current date
 let today = moment();
-$("#currentDay").text(today.format("MMM Do YYYY HH:mm A"));
+$("#currentDay").text(today.format("MMM Do YYYY HH:mm "));
 
 // set variables
 // let sevenAM = document.getElementById("7am");
@@ -24,24 +24,50 @@ $("#currentDay").text(today.format("MMM Do YYYY HH:mm A"));
 let elementsArray = []
 
 for (let i = 7; i < 22; i++) {
-    let el = document.getElementById(`${i}`)
+    let hour = today.format("HH")
+    let id = `${i}`
+    // console.log(id)
+    
     let textAreaElement = document.createElement("textarea")
+    // textAreaElement.addEventListener("keypress", )
     textAreaElement.cols = 85
     textAreaElement.rows = 3
+    
+    let el = document.getElementById(id)
     el.appendChild(textAreaElement)
-    let hour = today.format("HH")
+
+    let storedText = localStorage.getItem(id);
+
+    let saveButton = document.querySelector('.saveBtn')
+    saveButton.addEventListener("click", () => store(id,textAreaElement))
+    
+    if(storedText != null){
+        textAreaElement.value = storedText; 
+    }
+
     if(i > hour) {
-        
         el.classList.add("future")
-        
     } else if (i == hour) {
         el.classList.add("present")
-        
     } else {
         el.classList.add("past")
     }
     // elementsArray.push(el)
+
+
 }
+
+
+function store(id,textAreaElement){
+    // console.log(id)
+    let text = document.getElementById(id)
+    console.log('text', text)
+
+    localStorage.setItem(textAreaElement);
+}
+
+//local storage to keep values after refresh
+
 
 // sevenAM.classList.add("past")
 
