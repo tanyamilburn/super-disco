@@ -2,49 +2,31 @@
 let today = moment();
 $("#currentDay").text(today.format("MMM Do YYYY HH:mm "));
 
-// set variables
-// let sevenAM = document.getElementById("7am");
-// let eightAM = document.getElementById("8am");
-// let nineAM = document.getElementById("9am");
-// let tenAM = document.getElementById("10am");
-// let elevenAM = document.getElementById("11am");
-// let twelvePM = document.getElementById("12pm");
-// let onePM = document.getElementById("1pm");
-// let twoPM = document.getElementById("2pm");
-// let threePM = document.getElementById("3pm");
-// let fourPM = document.getElementById("4pm");
-// let fivePM = document.getElementById("5pm");
-// let sixPM = document.getElementById("6pm");
-// let sevenPM = document.getElementById("7pm");
-// let eightPM = document.getElementById("8pm");
-// let ninePM = document.getElementById("9pm");
+$(document).ready(function() {
+ 
+console.log( "ready!" );
+})
+    
+$(".saveBtn").on("click", function (event) {
+    let time = $(event.target).closest(".row").find('.col-9').attr('id')
+    let value = document.querySelector('.textArea').value;     
+        console.log(value)
+        console.log(time)
+    localStorage.setItem(time, value)
+    // $('#7.textArea').val(localStorage.getItem(time))
+ })
 
-// let timeArray = [ "7", "8am", "9am","10am", "11am","12pm", "1pm","2pm","3pm","4pm","5pm","6pm","7pm","8pm","9pm"] 
+// // .each.singularity.find(textarea).attr(id).val
 
-let elementsArray = []
 
+
+// change background color based on past present future
 for (let i = 7; i < 22; i++) {
     let hour = today.format("HH")
     let id = `${i}`
+    let el = document.getElementById(id)
     // console.log(id)
     
-    let textAreaElement = document.createElement("textarea")
-    // textAreaElement.addEventListener("keypress", )
-    textAreaElement.cols = 85
-    textAreaElement.rows = 3
-    
-    let el = document.getElementById(id)
-    el.appendChild(textAreaElement)
-
-    let storedText = localStorage.getItem(id);
-
-    let saveButton = document.querySelector('.saveBtn')
-    saveButton.addEventListener("click", () => store(id,textAreaElement))
-    
-    if(storedText != null){
-        textAreaElement.value = storedText; 
-    }
-
     if(i > hour) {
         el.classList.add("future")
     } else if (i == hour) {
@@ -52,33 +34,55 @@ for (let i = 7; i < 22; i++) {
     } else {
         el.classList.add("past")
     }
+    
+}
+
+
+    // let textAreaElement = document.createElement("textarea")
+    // textAreaElement.addEventListener("keypress", )
+    
+    // el.appendChild(textAreaElement)
+
+    // let storedText = localStorage.getItem(id);
+
+
+    
+    // if(storedText != null){
+    //     textAreaElement.value = storedText; 
+    // }
+
     // elementsArray.push(el)
+//     // let saveButton = document.querySelector('.saveBtn');
+    
+//     // console.log(time)
+//     // console.log(document.getElementById("7am"));
+    
+//     // saveButton.addEventListener("click",function(){
+//     //     localStorage.setItem(time, value)
+
+//     // localStorage.setItem(time, value);
 
 
-}
 
 
-function store(id,textAreaElement){
-    // console.log(id)
-    let text = document.getElementById(id)
-    console.log('text', text)
 
-    localStorage.setItem(textAreaElement);
-}
+// function store(id,textAreaElement){
+//     // console.log(id)
+//     let text = document.getElementById(id)
+//     console.log('text', text)
+
+//     localStorage.setItem(textAreaElement);
+// }
 
 //local storage to keep values after refresh
 
 
-// sevenAM.classList.add("past")
-
-// event listeners
-// sevenAM.addEventListener("keydown", textArea)
-// allow text input from user and save it
 
 
 
 
-// change background color based on past present future
+
+
 
 
 
